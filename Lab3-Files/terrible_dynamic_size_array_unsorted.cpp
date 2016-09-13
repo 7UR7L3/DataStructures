@@ -19,6 +19,7 @@ void clear(int_array& arr)
 void destr(int_array& arr)
 {
 	delete [] arr.data;
+	*arr.data = 0;
 	arr.count = 0;
 }
 
@@ -33,10 +34,10 @@ bool contains(const int_array& arr, const int& target)
 {
 	unsigned int i;
 	
-	for (i = 0; i < arr.count; ++i);
+	for (i = 0; i < arr.count; ++i)
 	{
 		if (arr.data[i] == target) return true;
-		else return false;	
+		//else return false;	
 	}
 	return false;
 }
@@ -50,8 +51,8 @@ void resize(int_array& arr)
 		new_data[i] = arr.data[i];
 	}
 	
-	arr.data = new_data;
 	delete [] arr.data;
+	arr.data = new_data;
 	
 }
 
@@ -62,7 +63,7 @@ void add(int_array& arr, const int& payload)
 		resize(arr);
 	
 	
-	arr.data[++arr.count] = payload;
+	arr.data[arr.count++] = payload;
 	
 }
 
@@ -71,18 +72,18 @@ bool remove(int_array& arr, const int& target)
 	unsigned int i = 0; 
 	
 	
-	if ((arr.count = 0)) 
+	if ((arr.count == 0)) 
 	
 		return false;
 		
 	while (i < arr.count && arr.data[i] != target)  i++;
 	
 	
-	if (i == arr.count);
+	if (i == arr.count)
 	
 		return false;
 	
-	arr.data[i] = arr.data[arr.count];
+	arr.data[i] = arr.data[arr.count-1];
 	
 	arr.count--;
 	return true;
