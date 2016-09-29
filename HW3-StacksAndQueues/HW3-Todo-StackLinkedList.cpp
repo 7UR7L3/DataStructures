@@ -3,16 +3,19 @@
 
 using namespace std;
 
+//	initalizes the head of the stack.
 TodoStackLinkedList::TodoStackLinkedList()
 {
 	stackHead = NULL;
 }
 
+//	returns if the head doesn't point to a todo item.
 bool TodoStackLinkedList::isEmpty()
 {
 	return stackHead == NULL;
 }
 
+//	adds element to stack.
 void TodoStackLinkedList::push( std::string todoItem )
 {
 	TodoItem* t = new TodoItem();
@@ -22,6 +25,7 @@ void TodoStackLinkedList::push( std::string todoItem )
 	stackHead = t;
 }
 
+//	removes element from stack if possible.
 void TodoStackLinkedList::pop()
 {
 	if( isEmpty() )
@@ -34,6 +38,7 @@ void TodoStackLinkedList::pop()
 	delete toDel;
 }
 
+//	returnes element at head of stack if possible.
 TodoItem* TodoStackLinkedList::peek()
 {
 	if( isEmpty() )

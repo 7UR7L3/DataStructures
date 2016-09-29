@@ -3,22 +3,26 @@
 
 using namespace std;
 
+//	sets up front and end.
 TodoQueueArray::TodoQueueArray()
 {
 	queueFront = 0;
 	queueEnd = -2;
 }
 
+//	set end to be -2 representing an empty queue.
 bool TodoQueueArray::isEmpty()
 {
 	return queueEnd == -2;
 }
 
+//	check if end is exactly one before front considering the array to be circular.
 bool TodoQueueArray::isFull()
 {
 	return (queueEnd + 1) % MAX_QUEUE_SIZE == queueFront;
 }
 
+//	adds item to queue.
 void TodoQueueArray::enqueue( std::string todoItem )
 {
 	if( isFull() )
@@ -32,6 +36,7 @@ void TodoQueueArray::enqueue( std::string todoItem )
 	queue[queueEnd] = t;
 }
 
+//	removes item from queue.
 void TodoQueueArray::dequeue()
 {
 	if( isEmpty() )
@@ -39,7 +44,7 @@ void TodoQueueArray::dequeue()
 		cout << "Queue empty, cannot dequeue an item." << endl;
 		return;
 	}
-	if( queueFront == queueEnd )
+	if( queueFront == queueEnd )	//	special case if exactly one element left. have to set end to -2.
 	{
 		delete queue[queueFront];
 		queueEnd = -2;
@@ -50,6 +55,7 @@ void TodoQueueArray::dequeue()
 
 }
 
+//	returns element next to be dequeued if such an element exists.
 TodoItem* TodoQueueArray::peek()
 {
 	if( isEmpty() )
