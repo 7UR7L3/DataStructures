@@ -56,8 +56,11 @@ int value = 30;
 			}
 		}
 	}
-	deleteNode(root, value);
-cout<<"Pre Order Traversal:"<<endl;
+	cout<<"Pre Order Traversal:"<<endl;
+	preOrderTraversal(root);
+	cout<<endl;
+	//deleteNode(root, value);
+	cout<<"Pre Order Traversal:"<<endl;
 	preOrderTraversal(root);
 	cout<<endl<<"In Order Traversal:"<<endl;
 	inOrderTraversal(root);
@@ -65,25 +68,87 @@ cout<<"Pre Order Traversal:"<<endl;
 	postOrderTraversal(root);
 
 	deleteAndReplaceMinRight(root,value);
-	cout<<"Pre Order Traversal:"<<endl;
+	cout<<endl<<"Pre Order Traversal:"<<endl;
 	preOrderTraversal(root);
 	cout<<endl<<"In Order Traversal:"<<endl;
 	inOrderTraversal(root);
 	cout<<endl<<"Post Order Traversal:"<<endl;
 	postOrderTraversal(root);
+	cout<<endl;
 	return 0;
 }
 //---------------------TO DO----------------------
 void deleteNode(TreeNode *node, int key) {
-	// Implement your code here
-
+	if( node == NULL ) return;
+	if( node->key == key )
+	{
+		if( node->left == NULL && node->right == NULL )
+		{
+			if( node->parent->left == node )
+			{
+				node->parent->left = NULL;
+				delete node->parent->left;
+			}
+			else
+			{
+				node->parent->right = NULL;
+				delete node->parent->right;
+			}
+		}
+		else if( node->left == NULL )
+		{
+			if( node->parent->left == node ) node->parent->left = node->right;
+			else node->parent->right = node->right;
+		}
+		else
+		{
+			TreeNode* n = node->left;
+			while( n->right != NULL ) n = n->right;
+			node->key = n->key;
+			n->parent->right = NULL;
+			delete n;
+		}
+	}
+	deleteNode( node->left, key );
+	deleteNode( node->right, key );
 }
 
 
 //---------------------TO DO----------------------
-void deleteAndReplaceMinRight(TreeNode *node, int key) {
-	// Implement your code here
-
+void deleteAndReplaceMinRight(TreeNode *node, int key)
+{
+	if( node == NULL ) return;
+	if( node->key == key )
+	{
+		if( node->left == NULL && node->right == NULL )
+		{
+			if( node->parent->left == node )
+			{
+				node->parent->left = NULL;
+				delete node->parent->left;
+			}
+			else
+			{
+				node->parent->right = NULL;
+				delete node->parent->right;
+			}
+		}
+		else if( node->right == NULL )
+		{
+			if( node->parent->left == node ) node->parent->left = node->left;
+			else node->parent->right = node->left;
+		}
+		else
+		{
+			TreeNode* n = node->right;
+			while( n->left != NULL ) n = n->left;
+			node->key = n->key;
+			n->parent->left = NULL;
+			delete n;
+		}
+	}
+	deleteAndReplaceMinRight( node->left, key );
+	deleteAndReplaceMinRight( node->right, key );
 }
 
 void preOrderTraversal(TreeNode *node)
@@ -117,7 +182,5 @@ void postOrderTraversal(TreeNode *node)
 		postOrderTraversal(node->left);
 		postOrderTraversal(node->right);
 		cout<<node->key<< " ";
-
 	}
 }
-
