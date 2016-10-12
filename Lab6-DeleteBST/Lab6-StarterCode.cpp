@@ -20,7 +20,7 @@ int main() {
 //test case input
 int a[] = { 25, 15, 30, 28, 35, 27, 29, 33, 70};
 int length = 9;
-int value = 30;	
+int value = 28;	
 	//end of input
 	
 	for(int i=0; i<length; i++) {
@@ -56,7 +56,7 @@ int value = 30;
 			}
 		}
 	}
-	deleteNode(root, value);
+	deleteNode(root, 30);
 	cout<<"Pre Order Traversal:"<<endl;
 	preOrderTraversal(root);
 	cout<<endl<<"In Order Traversal:"<<endl;
@@ -64,7 +64,7 @@ int value = 30;
 	cout<<endl<<"Post Order Traversal:"<<endl;
 	postOrderTraversal(root);
 
-	deleteAndReplaceMinRight(root,value);
+	deleteAndReplaceMinRight(root,28);
 	cout<<endl<<"Pre Order Traversal:"<<endl;
 	preOrderTraversal(root);
 	cout<<endl<<"In Order Traversal:"<<endl;
@@ -114,9 +114,11 @@ void deleteNode(TreeNode *node, int key) {
 		else
 		{
 			TreeNode* n = node->left;
-			while( n->right != NULL ) n = n->right;
+			int i = 0;
+			while( n->right != NULL ){ n = n->right; i++; }
 			node->key = n->key;
-			n->parent->right = NULL;
+			if( i == 0 ) n->parent->left = NULL;
+			else n->parent->right = NULL;
 			delete n;
 		}
 	}
@@ -166,9 +168,11 @@ void deleteAndReplaceMinRight(TreeNode *node, int key)
 		else
 		{
 			TreeNode* n = node->right;
-			while( n->left != NULL ) n = n->left;
+			int i = 0;
+			while( n->left != NULL ) { n = n->left; i++; }
 			node->key = n->key;
-			n->parent->left = NULL;
+			if( i == 0 ) n->parent->right = NULL;
+			else n->parent->left = NULL;
 			delete n;
 		}
 	}
