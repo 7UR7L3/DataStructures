@@ -2,7 +2,7 @@
 // Created: October 12, 2016
 // @author Michael Rahn
 //
-// Homework 4
+// Homework 5
 //
 // CSCI2270 - Boese
 //
@@ -61,7 +61,9 @@ int main( int argc, char* argv[] )
 		cout << "1. Find a movie" << endl;
 		cout << "2. Rent a movie" << endl;
 		cout << "3. Print the inventory" << endl;
-		cout << "4. Quit" << endl;
+		cout << "4. Count the number of movies in the inventory" << endl;
+		cout << "5. Delete a movie" << endl;
+		cout << "6. Quit" << endl;
 
 		getline( cin, c );
 
@@ -81,10 +83,21 @@ int main( int argc, char* argv[] )
 		{
 			tree->printMovieInventory();
 		}
-		else if( c == "4" ) break;
+		else if( c == "4" )
+		{
+			cout << tree->countMovieNodes() << endl;
+		}
+		else if( c == "5" )
+		{
+			cout << "Enter title:" << endl;
+			getline( cin, c );
+			tree->deleteMovieNode( c );
+		}
+		else if( c == "6" ) break;
 		else cout << "Invalid Input" << endl;
 	}
 
+	delete tree;
 	cout << "Goodbye!" << endl;
 	return 0; // Program success.
 }
