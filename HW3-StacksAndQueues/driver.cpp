@@ -1,7 +1,4 @@
-//#include "HW3-Todo-QueueArray.hpp"
-//#include "HW3-Todo-QueueLinkedList.hpp"
-//#include "HW3-Todo-StackArray.hpp"
-#include "HW3-Todo-StackLinkedList.hpp"
+#include "HW3-Todo-StackArray.cpp"
 
 #include <iostream>
 #include <sstream>
@@ -10,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	TodoStackLinkedList* a = new TodoStackLinkedList();
+	TodoStackArray* a = new TodoStackArray();
 	for( int i = 0; i < 10; i++ )
 	{
 		if( a->peek() != NULL ) cout << a->peek()->todo << endl;
