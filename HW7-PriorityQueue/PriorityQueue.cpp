@@ -25,7 +25,7 @@ int PatientQueue::size()
 } 
  
 bool PatientQueue::isEmpty() 
-{ 
+{
   return lastIndex == -1; 
 } 
  
